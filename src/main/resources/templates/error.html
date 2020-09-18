@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>エラーページ - サンプルサイトにようこそ</title>
+	<link rel="stylesheet" th:href="@{/css/common.css}">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+</head>
+<body>
+	<header>
+		<div class="head_title">
+			<h1>Spring Web Sample</h1>
+		</div>
+	</header>
+	<main>
+		<div class="wrapper">
+			<div class="content">
+				<div class="error">
+					<div>
+						<img th:src="@{/img/pose_syazai_man.png}">
+					</div>
+					<p>サーバーエラーが発生しました</p>
+					<p>お手数ですが、トップページから開きなおしてください</p>
+					<a th:href="@{/}">トップページ</a>
+				</div>
+			</div>
+		</div>
+	</main>
+</body>
+</html>

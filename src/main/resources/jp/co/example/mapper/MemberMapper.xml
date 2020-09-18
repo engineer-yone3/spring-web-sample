@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+<mapper namespace="sample.mybatis">
+  <select id="selectTest" resultType="map">
+    select * from test_table
+  </select>
+</mapper>
+
+<mapper namespace="sample.mybatis">
+  <resultMap id="testTableResultMap" type="sample.mybatis.TestTable">
+    <id property="id" column="id" />
+    <result property="value" column="value" />
+  </resultMap>
+
+  <select id="selectTest" resultMap="testTableResultMap">
+    select * from test_table
+  </select>
+</mapper>
+-->
+<mapper namespace="jp.co.example.mapper.MemberMapper">
+  <select id="getMembers" resultType="jp.co.example.entity.MemberEntity">
+    select
+      user_id
+      ,user_email
+      ,reg_date
+      ,upd_date
+      ,is_delete
+      ,del_date
+      ,user_name
+      ,user_name_kana
+      ,address1
+      ,address2
+      ,tel
+      ,pwd
+      ,last_login
+    from
+      t_member
+    where
+          user_email = #{cond_mail}
+      and is_delete = '0'
+  </select>
+
+  <select id="getMaxUserId" resultType="java.lang.String">
+    select max(user_id) from t_member
+  </select>
+
+  <select id="doLogin" resultType="jp.co.example.entity.MemberEntity">
+    select
+      user_id
+      ,user_email
+      ,reg_date
+      ,upd_date
+      ,is_delete
+      ,del_date
+      ,user_name
+      ,user_name_kana
+      ,address1
+      ,address2
+      ,tel
+      ,pwd
+      ,last_login
+    from
+      t_member
+    where
+          user_email = #{cond_mail}
+      and is_delete = '0'
+  </select>
+
+  <insert id="registNewMember">
+    insert into t_member values (
+      #{userId}
+      ,#{userEmail}
+      ,NOW()
+      ,null
+      ,'0'
+      ,null
+      ,#{userName}
+      ,#{userNameKana}
+      ,#{address1}
+      ,#{address2}
+      ,#{tel}
+      ,#{pwd}
+      ,NOW()
+    )
+  </insert>
+
+  <update id="updateLastLogin">
+    update t_member
+    set last_login = NOW()
+    where
+          user_id = #{userId}
+      and is_delete = '0'
+  </update>
+
+  <select id="getMemberById" resultType="jp.co.example.entity.MemberEntity">
+    select
+      user_id
+      ,user_email
+      ,reg_date
+      ,upd_date
+      ,is_delete
+      ,del_date
+      ,user_name
+      ,user_name_kana
+      ,address1
+      ,address2
+      ,tel
+      ,pwd
+      ,last_login
+    from
+      t_member
+    where
+          user_id = #{userId}
+      and is_delete = '0'
+  </select>
+
+  <update id="deleteMember">
+    update t_member
+    set
+        is_delete = '1'
+        ,del_date = NOW()
+    where
+          user_id = #{userId}
+      and is_delete = '0'
+  </update>
+
+  <update id="modifyMember">
+    update
+      t_member
+    set
+      user_email = #{userEmail}
+      ,upd_date = NOW()
+      ,user_name = #{userName}
+      ,user_name_kana = #{userNameKana}
+      ,address1 = #{address1}
+      ,address2 = #{address2}
+      ,tel = #{tel}
+      ,pwd = #{pwd}
+    where
+          user_id = #{userId}
+      and is_delete = '0'
+  </update>
+</mapper>
+
+

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>マイページ - サンプルサイトにようこそ</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script th:src="@{/js/mypage.js}" charset="utf-8"></script>
+	<link rel="stylesheet" th:href="@{/css/common.css}">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+</head>
+<body>
+	<header>
+		<div class="head_title">
+			<h1>Spring Web Sample</h1>
+		</div>
+	</header>
+	<main>
+		<div class="content-header">
+			<h2>マイページ</h2>
+		</div>
+		<div class="wrapper">
+			<div class="content box-parent">
+				<div class="leftDiv">
+					<p>Menu</p>
+					<ul>
+						<li><a href="#" id="member-modify-link">会員情報変更</a></li>
+						<li><a href="#" id="member-delete-link">会員退会</a></li>
+						<li><a href="#" id="logoutlink">ログアウト</a></li>
+					</ul>
+				</div>
+				<div class="rightDiv" th:object="${myPageForm}">
+					<div class="last-login">
+						<span>最終ログイン時刻:<span th:text="*{lastLogin}"></span></span>
+					</div>
+					<div class="user-data-box">
+						<ul>
+							<li><label class="inputlabel">ユーザーID(メールアドレス):</label><span th:text="*{userEmail}"></span></li>
+							<li><label class="inputlabel">氏名:</label><span th:text="*{userName}"></span></li>
+							<li><label class="inputlabel">氏名(カナ):</label><span th:text="*{userNameKana}"></span></li>
+							<li><label class="inputlabel">郵便番号:</label><span th:text="*{zip}"></span></li>
+							<li><label class="inputlabel">都道府県:</label><span th:text="*{todofuken}"></span></li>
+							<li><label class="inputlabel">市区郡:</label><span th:text="*{shikugun}"></span></li>
+							<li><label class="inputlabel">以降の住所:</label><span th:text="*{address2}"></span></li>
+							<li><label class="inputlabel">電話番号:</label><span th:text="*{tel}"></span></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</body>
+</html>

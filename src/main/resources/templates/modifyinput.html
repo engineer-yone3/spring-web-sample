@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>会員情報変更 入力 - サンプルサイトにようこそ</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script th:src="@{/js/regist.js}" charset="utf-8"></script>
+	<script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
+	<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/css/common.css}">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+</head>
+<body>
+	<header>
+		<div class="head_title">
+			<h1>Spring Web Sample</h1>
+		</div>
+	</header>
+	<main>
+		<div class="content-header">
+			<h2>会員情報変更 入力</h2>
+			<p>各項目を入力し、「次へ」ボタンを押してください</p>
+			<p>パスワードのみ、入力したした場合に更新されます(未入力は更新しない)</p>
+		</div>
+		<div class="wrapper">
+			<div class="content">
+				<form action="/modifyconfirm" th:action="@{/modifyconfirm}" th:object="${modifyForm}" method="post">
+					<div th:if="${#fields.hasAnyErrors()}" class="form-error">
+						<p th:each="err : ${#fields.allErrors()}" th:text="${err}"></p>
+					</div>
+					<ul>
+						<li class="input-box">
+							<label class="inputlabel">会員ID(メールアドレス):</label>
+							<i class="fas fa-envelope-square"></i>
+							<input type="text" class="text-input" th:field="*{userMail}" placeholder="Eメールアドレス" />
+						</li>
+						<li class="input-box">
+							<label class="inputlabel">パスワード:</label>
+							<i class="fas fa-key"></i>
+							<input type="password" class="text-input" th:field="*{pwd}" placeholder="パスワード" />
+							<input type="checkbox" id="isPasswordVisible" />表示する
+						</li>
+						<li class="input-box">
+							<label class="inputlabel">氏名:</label>
+							<i class="fas fa-user"></i>
+							<input type="text" class="text-input" th:field="*{name}" placeholder="氏名" />
+						</li>
+						<li class="input-box">
+							<label class="inputlabel">氏名(カナ):</label>
+							<i class="fas fa-user"></i>
+							<input type="text" class="text-input" th:field="*{kana}" placeholder="氏名(カナ)" />
+						</li>
+						<li class="input-box">
+							<label class="inputlabel">電話番号:</label>
+							<i class="fas fa-phone"></i>
+							<input type="text" class="text-input" th:field="*{tel}" placeholder="電話番号" />
+						</li>
+						<li class="input-box">
+							<label class="inputlabel">郵便番号:</label>
+							<i class="fas fa-tenge"></i>
+							<input type="text" class="text-input" th:field="*{zip}" size="7" onKeyUp="AjaxZip3.zip2addr(this,'','todofuken','shikugun','address');" />
+						</li>
+						<li class="input-box">
+							<label class="inputlabel">都道府県:</label>
+							<i class="fas fa-map-marker-alt"></i>
+							<select class="text-input" th:field="*{todofuken}">
+								<option value="" selected>選択してください</option>
+								<option value="北海道">北海道</option>
+								<option value="青森県">青森県</option>
+								<option value="岩手県">岩手県</option>
+								<option value="宮城県">宮城県</option>
+								<option value="秋田県">秋田県</option>
+								<option value="山形県">山形県</option>
+								<option value="福島県">福島県</option>
+								<option value="茨城県">茨城県</option>
+								<option value="栃木県">栃木県</option>
+								<option value="群馬県">群馬県</option>
+								<option value="埼玉県">埼玉県</option>
+								<option value="千葉県">千葉県</option>
+								<option value="東京都">東京都</option>
+								<option value="神奈川県">神奈川県</option>
+								<option value="新潟県">新潟県</option>
+								<option value="富山県">富山県</option>
+								<option value="石川県">石川県</option>
+								<option value="福井県">福井県</option>
+								<option value="山梨県">山梨県</option>
+								<option value="長野県">長野県</option>
+								<option value="岐阜県">岐阜県</option>
+								<option value="静岡県">静岡県</option>
+								<option value="愛知県">愛知県</option>
+								<option value="三重県">三重県</option>
+								<option value="滋賀県">滋賀県</option>
+								<option value="京都府">京都府</option>
+								<option value="大阪府">大阪府</option>
+								<option value="兵庫県">兵庫県</option>
+								<option value="奈良県">奈良県</option>
+								<option value="和歌山県">和歌山県</option>
+								<option value="鳥取県">鳥取県</option>
+								<option value="島根県">島根県</option>
+								<option value="岡山県">岡山県</option>
+								<option value="広島県">広島県</option>
+								<option value="山口県">山口県</option>
+								<option value="徳島県">徳島県</option>
+								<option value="香川県">香川県</option>
+								<option value="愛媛県">愛媛県</option>
+								<option value="高知県">高知県</option>
+								<option value="福岡県">福岡県</option>
+								<option value="佐賀県">佐賀県</option>
+								<option value="長崎県">長崎県</option>
+								<option value="熊本県">熊本県</option>
+								<option value="大分県">大分県</option>
+								<option value="宮崎県">宮崎県</option>
+								<option value="鹿児島県">鹿児島県</option>
+								<option value="沖縄県">沖縄県</option>
+							</select>
+						</li>
+						<li class="input-box">
+							<label class="inputlabel">市区郡:</label>
+							<i class="fas fa-map-marker-alt"></i>
+							<input type="text" class="text-input" th:field="*{shikugun}" placeholder="市区郡" />
+						</li>
+						<li class="input-box">
+							<label class="inputlabel">以降の住所:</label>
+							<i class="fas fa-map-marker-alt"></i>
+							<input type="text" class="text-input" th:field="*{address}" placeholder="以降の住所" />
+						</li>
+					</ul>
+					<button id="goBackMypagebtn" type="button" class="btn btn-color-normal">戻る</button>
+					<input type="submit" id="confirmSubmit" class="btn btn-color-normal" value="次へ" />
+				</form>
+			</div>
+		</div>
+	</main>
+</body>
+</html>
