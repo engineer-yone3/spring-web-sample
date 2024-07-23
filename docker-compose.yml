@@ -1,0 +1,27 @@
+volumes:
+  db_volume:
+
+services:
+  java:
+    build: .docker/java
+    ports:
+      - "8080:8080"
+      - "5005:5005"
+    volumes:
+      - ./projdir:/app
+    tty: true
+    environment:
+      TZ: Asia/Tokyo
+
+  db:
+    build: .docker/mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_volume:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: spring_web_sample_db
+      MYSQL_PASSWORD: password
+      MYSQL_USER: username
+      MYSQL_ROOT_PASSWORD: root
+      TZ: Asia/Tokyo
