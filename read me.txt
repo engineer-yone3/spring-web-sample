@@ -1,4 +1,0 @@
-このソースコードを使ったページを
-https://general-of-somewhere.mydns.jp/spring-web-sample/
-で公開しています。
-(上記のサイトにあるソースは環境用に多少アレンジされたものをデプロイしています)
