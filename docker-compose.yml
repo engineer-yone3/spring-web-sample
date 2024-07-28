@@ -2,17 +2,6 @@ volumes:
   db_volume:
 
 services:
-  java:
-    build: .docker/java
-    ports:
-      - "8080:8080"
-      - "5005:5005"
-    volumes:
-      - ./projdir:/app
-    tty: true
-    environment:
-      TZ: Asia/Tokyo
-
   db:
     build: .docker/mysql
     ports:
