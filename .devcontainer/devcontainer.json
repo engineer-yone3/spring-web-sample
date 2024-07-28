@@ -1,7 +1,0 @@
-{
-    "name": "java-devcontainer",
-    "features": {},
-    "dockerComposeFile": "../docker-compose.yml",
-    "workspaceFolder": "/projdir",
-    "workspaceMount": "source=/projdir,target=/app,type=bind"
-}
