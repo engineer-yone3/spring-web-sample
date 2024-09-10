@@ -1,4 +1,4 @@
-package com.example.yone3.spring_web_sample.controller;
+package com.example.yone3.springwebsample.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

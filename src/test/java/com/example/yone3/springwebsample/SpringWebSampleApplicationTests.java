@@ -1,4 +1,4 @@
-package com.example.yone3.spring_web_sample;
+package com.example.yone3.springwebsample;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

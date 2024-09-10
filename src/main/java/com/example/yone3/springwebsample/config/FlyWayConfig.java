@@ -1,4 +1,4 @@
-package com.example.yone3.spring_web_sample.config;
+package com.example.yone3.springwebsample.config;
 
 import org.flywaydb.core.Flyway;
 import org.springframework.boot.autoconfigure.flyway.FlywayMigrationStrategy;
