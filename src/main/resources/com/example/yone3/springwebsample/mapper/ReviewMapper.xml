@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.yone3.springwebsample.mapper.ReviewMapper">
+  <select id="getReviews" resultType="com.example.yone3.springwebsample.entity.ReviewEntity">
+    SELECT
+        *
+    FROM
+        reviews
+    WHERE
+      reviewer_name = #{reviewerName}
+      AND book_name = #{bookName}
+      AND ip_address = #{ipAddress}
+  </select>
+  <insert id="insertReview" useGeneratedKeys="true"
+          keyProperty="reviewId" keyColumn="review_id">
+    INSERT INTO reviews
+    (
+        reviewer_name,
+        book_name,
+        image_url,
+        evaluation,
+        content,
+        ip_address,
+        user_agent,
+        created_at,
+        updated_at
+    ) values (
+        #{entity.reviewerName},
+        #{entity.bookName},
+        #{entity.imageUrl},
+        #{entity.evaluation},
+        #{entity.content},
+        #{entity.ipAddress},
+        #{entity.userAgent},
+        #{entity.createdAt},
+        #{entity.updatedAt}
+    )
+  </insert>
+  <update id="updateReview" keyColumn="review_id">
+    UPDATE reviews
+    SET
+        reviewer_name = #{entity.reviewerName},
+        book_name = #{entity.bookName},
+        image_url = #{entity.imageUrl},
+        evaluation = #{entity.evaluation},
+        content = #{entity.content},
+        user_agent = #{entity.userAgent},
+        updated_at = #{entity.updatedAt}
+    WHERE
+        review_id = #{entity.reviewId}
+  </update>
+</mapper>

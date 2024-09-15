@@ -5,7 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 @Data
 @Table("reviews")
@@ -13,7 +13,7 @@ public class ReviewEntity {
 
     @Id
     @Column("review_id")
-    private int reviewId;
+    private long reviewId;
 
     @Column("reviewer_name")
     private String reviewerName;
@@ -37,16 +37,16 @@ public class ReviewEntity {
     private String userAgent;
 
     @Column("created_at")
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
     @Column("updated_at")
-    private Date updatedAt;
+    private LocalDateTime updatedAt;
 
     @Column("deleted_at")
-    private Date deletedAt;
+    private LocalDateTime deletedAt;
 
     public static ReviewEntity newInstance(
-            int reviewId,
+            long reviewId,
             String reviewerName,
             String bookName,
             String imageUrl,
@@ -54,9 +54,9 @@ public class ReviewEntity {
             String content,
             String ipAddress,
             String userAgent,
-            Date createdAt,
-            Date updatedAt,
-            Date deletedAt
+            LocalDateTime createdAt,
+            LocalDateTime updatedAt,
+            LocalDateTime deletedAt
     ) {
         ReviewEntity entity = new ReviewEntity();
         entity.setReviewId(reviewId);
