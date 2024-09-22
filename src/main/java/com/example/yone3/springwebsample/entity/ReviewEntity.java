@@ -45,6 +45,8 @@ public class ReviewEntity {
     @Column("deleted_at")
     private LocalDateTime deletedAt;
 
+    private boolean canDelete;
+
     public static ReviewEntity newInstance(
             long reviewId,
             String reviewerName,
@@ -56,7 +58,8 @@ public class ReviewEntity {
             String userAgent,
             LocalDateTime createdAt,
             LocalDateTime updatedAt,
-            LocalDateTime deletedAt
+            LocalDateTime deletedAt,
+            boolean canDelete
     ) {
         ReviewEntity entity = new ReviewEntity();
         entity.setReviewId(reviewId);
@@ -70,6 +73,7 @@ public class ReviewEntity {
         entity.setCreatedAt(createdAt);
         entity.setUpdatedAt(updatedAt);
         entity.setDeletedAt(deletedAt);
+        entity.setCanDelete(canDelete);
 
         return entity;
     }

@@ -7,6 +7,15 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   <title th:replace="${title}">(default)</title>
+  <style>
+      @keyframes slideIn {
+          from { transform: translateX(100%); }
+          to { transform: translateX(0); }
+      }
+      .slide-in {
+          animation: slideIn 0.5s ease-out;
+      }
+  </style>
 </head>
 <body>
   <div class="lg:container flex-col items-center justify-center mx-auto">

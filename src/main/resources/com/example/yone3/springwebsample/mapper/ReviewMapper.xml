@@ -52,4 +52,47 @@
     WHERE
         review_id = #{entity.reviewId}
   </update>
+  <select id="searchReviews" resultType="com.example.yone3.springwebsample.entity.ReviewEntity">
+    SELECT
+      *
+    FROM
+      reviews
+    <if test="bookName != null and bookName != ''">
+      WHERE
+          book_name LIKE #{bookName}
+    </if>
+  </select>
+  <delete id="deleteReview">
+    DELETE FROM reviews WHERE review_id = #{id}
+  </delete>
+  <select id="findById">
+    SELECT * FROM reviews WHERE review_id = #{id}
+  </select>
+  <insert id="bulkCreate">
+    INSERT INTO reviews
+    (
+       reviewer_name,
+       book_name,
+       image_url,
+       evaluation,
+       content,
+       ip_address,
+       user_agent,
+       created_at,
+       updated_at
+    ) VALUES
+    <foreach collection="reviews" item="review" separator=",">
+    (
+      #{review.reviewerName},
+      #{review.bookName},
+      #{review.imageUrl},
+      #{review.evaluation},
+      #{review.content},
+      #{review.ipAddress},
+      #{review.userAgent},
+      #{review.createdAt},
+      #{review.updatedAt}
+    )
+    </foreach>
+  </insert>
 </mapper>

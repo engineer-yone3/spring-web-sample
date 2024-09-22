@@ -12,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 @ImageRequired
 public class ReviewRegisterForm implements Serializable {
 
+    private String reviewId;
+
     @Size(max = 50)
     @NotBlank(message = "{NotBlank.registerForm.reviewer_name}")
     private String reviewerName;

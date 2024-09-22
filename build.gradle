@@ -28,7 +28,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+	implementation 'org.springframework.shell:spring-shell-starter'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
+	implementation 'com.github.pagehelper:pagehelper-spring-boot-starter:1.4.6'
+	implementation 'net.datafaker:datafaker:2.0.0'
 	implementation 'org.flywaydb:flyway-core'
 	implementation group: 'org.springframework', name: 'spring-jdbc', version: '6.1.11'
 	implementation group: 'com.mysql', name: 'mysql-connector-j', version: '9.0.0'
@@ -39,6 +42,12 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.shell:spring-shell-dependencies:3.3.2"
+	}
 }
 
 tasks.named('test') {

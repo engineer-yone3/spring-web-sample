@@ -60,18 +60,24 @@ public class ReviewRegisterController {
             }
         }
 
+        String ipAddress = request.getHeader("X-Forwarded-For");
+        if (ipAddress == null) {
+            ipAddress = request.getRemoteAddr();
+        }
+
         ReviewEntity formEntity = ReviewEntity.newInstance(
-                0,
+                StringUtils.isEmpty(form.getReviewId()) ? 0 : Long.parseLong(form.getReviewId()),
                 form.getReviewerName(),
                 form.getBookName(),
                 StringUtils.isEmpty(uploadfilePath) ? form.getImageUrl() : uploadfilePath,
                 form.getEvaluation(),
                 form.getContent(),
-                request.getRemoteAddr(),
+                ipAddress,
                 request.getHeader("User-Agent"),
                 null,
                 null,
-                null
+                null,
+                false
         );
 
         try {
