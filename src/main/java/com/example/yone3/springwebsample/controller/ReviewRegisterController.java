@@ -4,6 +4,7 @@ import com.example.yone3.springwebsample.entity.ReviewEntity;
 import com.example.yone3.springwebsample.exception.TooManyResultsException;
 import com.example.yone3.springwebsample.form.ReviewRegisterForm;
 import com.example.yone3.springwebsample.service.ReviewService;
+import com.example.yone3.springwebsample.service.StorageService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,21 +16,17 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.multipart.MultipartFile;
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 import org.thymeleaf.util.StringUtils;
 
 
 @Controller
 public class ReviewRegisterController {
 
-    private static final String UPLOAD_DIR = "img/uploads";
-
     @Autowired
     private ReviewService service;
+
+    @Autowired
+    private StorageService storageService;
 
     @GetMapping("/register")
     public String registerView(Model model) {
@@ -51,9 +48,8 @@ public class ReviewRegisterController {
 
         String uploadfilePath = "";
         if (!form.getImage().isEmpty()) {
-            try {
-                uploadfilePath = createFile(form.getImage());
-            } catch (Exception e) {
+            uploadfilePath = storageService.uploadImageFile(form.getImage());
+            if (StringUtils.isEmpty(uploadfilePath)) {
                 FieldError error = new FieldError(bindingResult.getObjectName(), "image", "画像の読み込みに失敗しました");
                 bindingResult.addError(error);
                 return "register";
@@ -82,6 +78,9 @@ public class ReviewRegisterController {
 
         try {
             service.RegisterReview(formEntity);
+            if (!StringUtils.isEmpty(uploadfilePath)) {
+                form.setImageUrl(uploadfilePath);
+            }
         } catch (TooManyResultsException ex) {
             ObjectError error = new ObjectError("globalError", "登録データが複数件あり、処理できない状態です");
             bindingResult.addError(error);
@@ -95,27 +94,6 @@ public class ReviewRegisterController {
 
         model.addAttribute("successMessage", "正常に登録/更新できました");
         return "register";
-    }
-
-    private String createFile(MultipartFile file) throws Exception {
-
-        try {
-            File uploadDir = new File(UPLOAD_DIR);
-            if (!uploadDir.exists()) {
-                uploadDir.mkdirs();
-            }
-
-            // 画像ファイルの保存先パス
-            String filePath = UPLOAD_DIR + File.separator + file.getOriginalFilename();
-
-            // 画像ファイルをディスクに保存
-            Path destination = new File(filePath).toPath();
-            Files.copy(file.getInputStream(), destination, StandardCopyOption.REPLACE_EXISTING);
-
-            return filePath;
-        } catch (Exception e) {
-            throw e;
-        }
     }
 
 }
