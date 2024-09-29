@@ -16,6 +16,7 @@
 - datafaker(2.0.0)
 - MyBatis(3.0.3)
 - flyway(10.16.0)
+- minio(8.5.0)
 
 他、細かい設定等はbuild.gradleを見てください。
 

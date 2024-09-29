@@ -36,6 +36,8 @@ dependencies {
 	implementation group: 'org.springframework', name: 'spring-jdbc', version: '6.1.11'
 	implementation group: 'com.mysql', name: 'mysql-connector-j', version: '9.0.0'
 	implementation group: 'org.flywaydb', name: 'flyway-mysql', version: '10.16.0'
+    implementation 'io.minio:minio:8.5.0'
+	implementation 'com.squareup.okhttp3:okhttp:4.9.3'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'

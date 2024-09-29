@@ -27,7 +27,6 @@ public class ReviewService {
      */
     @Transactional
     public void RegisterReview(ReviewEntity entity) throws Exception {
-        System.out.println("登録/更新処理開始");
         try {
             if (entity.getReviewId() > 0) {
                 ReviewEntity prevData = mapper.findById(entity.getReviewId());
@@ -39,7 +38,6 @@ public class ReviewService {
                 List<ReviewEntity> results = mapper.getReviews(entity.getReviewerName(), entity.getBookName(), entity.getIpAddress());
                 if (results.isEmpty()) {
                     // 新規登録
-                    System.out.println("新規登録");
                     LocalDateTime nowDateTime = LocalDateTime.now();
                     entity.setCreatedAt(nowDateTime);
                     entity.setUpdatedAt(nowDateTime);
@@ -49,7 +47,6 @@ public class ReviewService {
                     throw new TooManyResultsException();
                 } else {
                     // 更新
-                    System.out.println("更新データ！");
                     entity.setReviewId(results.get(0).getReviewId());
                     entity.setUpdatedAt(LocalDateTime.now());
                     mapper.updateReview(entity);
